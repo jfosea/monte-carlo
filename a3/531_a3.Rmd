@@ -1,0 +1,528 @@
+---
+geometry: margin=1.5cm
+output: 
+  pdf_document: default
+---
+
+\begin{titlepage}
+  \vspace*{\fill}
+  \begin{center}
+    \LARGE{\textbf{STAT 531: Assignment \# 3}}\\[0.5cm]
+    \small{Due on November 5, 2020}\\[0.5cm]
+    \large{\textit{Dr. Lu TTh 11:00 am}} \\[0.5cm]
+    \large{By: Jana Osea (30016679)}
+  \end{center}
+  \vspace*{\fill}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+\section{Problem 1}
+
+(a) We want to calculate the 2-step transition probability matrix.
+    
+    \begin{align*}
+    P^2 = 
+    \left(
+    \begin{array}{cc}
+    0.4 &0.6 \\
+    0.6 &0.4
+    \end{array}
+    \right)
+    \left(
+    \begin{array}{cc}
+    0.4 &0.6 \\
+    0.6 &0.4
+    \end{array}
+    \right) = 
+    \left(
+    \begin{array}{cc}
+    0.52 &0.48 \\
+    0.48 &0.52
+    \end{array}
+    \right)
+    \end{align*}
+    
+(b) We want to find $P(X_3=I|X_0=I)$.
+
+    \begin{align*}
+        P^3 = 
+        \left(
+        \begin{array}{cc}
+        0.4 &0.6 \\
+        0.6 &0.4
+        \end{array}
+        \right)
+        \left(
+        \begin{array}{cc}
+        0.4 &0.6 \\
+        0.6 &0.4
+        \end{array}
+        \right)
+        \left(
+        \begin{array}{cc}
+        0.4 &0.6 \\
+        0.6 &0.4
+        \end{array}
+        \right) = 
+        \left(
+        \begin{array}{cc}
+        0.496 &0.504 \\
+        0.504 &0.496
+        \end{array}
+        \right)
+    \end{align*}
+    
+    And so $P(X_3=I|X_0=I) = 0.496$
+    
+\section{Problem 2}
+
+(a) We want to find $P(X_2=2|X_0=1).$
+    
+    \begin{align*}
+    P^2 = 
+    \left(
+    \begin{array}{cc}
+    0.8 &0.2 \\
+    0.4 &0.6
+    \end{array}
+    \right)
+    \left(
+    \begin{array}{cc}
+    0.8 &0.2 \\
+    0.4 &0.6
+    \end{array}
+    \right) =
+    \left(
+    \begin{array}{cc}
+    0.72 &0.28 \\
+    0.56 &0.44
+    \end{array}
+    \right) 
+    \end{align*}
+    
+    And so $P(X_2=2|X_0=1) = 0.28$.
+    
+(b) We want to find $\pi_2$ in $\boldsymbol{\pi} = \lim_{n \to \infty}\boldsymbol{\pi}^{(n)}= (\pi_1 \hspace{0.25cm} \pi_2)$. We start with 
+
+    \begin{align*}
+    \left(
+    \begin{array}{cc}
+    \pi_1 &\pi_2
+    \end{array}
+    \right) 
+    \left(
+    \begin{array}{cc}
+    0.8 &0.2\\
+    0.4 &0.6
+    \end{array}
+    \right) &= 
+    \left(
+    \begin{array}{cc}
+    \pi_1 &\pi_2
+    \end{array}
+    \right) \\
+    \rightarrow 
+    0.8\pi_1 + 0.4\pi_2 &= \pi_1 \\
+    0.2\pi_1 + 0.6\pi_2 &= \pi_2 \\
+    \pi_1 + \pi_2 &= 1 \\
+    \rightarrow
+    \underbrace{\left(
+    \begin{array}{cc}
+    -0.2 &0.4\\
+    1 &1
+    \end{array}
+    \right)}_{A}
+    \left(
+    \begin{array}{c}
+    \pi_1 \\
+    \pi_2
+    \end{array}
+    \right) &= 
+    \left(
+    \begin{array}{c}
+    0 \\
+    1
+    \end{array}
+    \right) \\
+    det(A)= -0.2-0.4 &=-0.6
+    \end{align*}
+    
+    We calculate each part as
+    
+    \begin{align*}
+    \pi_1 &= \frac{1}{-0.6}det\left(
+    \begin{array}{cc} 
+    0 &0.4 \\
+    1 &1
+    \end{array} 
+    \right) \\
+    &= \frac{-0.4}{-0.6} \\
+    &= \frac{2}{3}
+    \end{align*}
+    
+    \begin{align*}
+    \pi_2 &= \frac{1}{-0.6}det\left(
+    \begin{array}{cc} 
+    -0.2 &0 \\
+    1 &1
+    \end{array} 
+    \right) \\
+    &= \frac{-0.2}{-0.6} \\
+    &= \frac{1}{3}
+    \end{align*}
+    
+    Therefore, the probability that Nov. 1 next year Rainbow will rain is $\pi_2=\frac{1}{3}.$
+
+\section{Problem 3}
+
+(a) We want to find the distribution $\pi_2$ of $X_2$. We find 
+
+    \begin{align*}
+    P^{(2)} &= (0 \hspace{0.25cm}1)P^2\\
+    \rightarrow P^{(2)} &= (0 \hspace{0.25cm}1) 
+    \left(
+    \begin{array}{cc}
+    0.8 &0.2\\
+    0.1 &0.9
+    \end{array}
+    \right) 
+    \left(
+    \begin{array}{cc}
+    0.8 &0.2\\
+    0.1 &0.9
+    \end{array}
+    \right) \\
+    &=  (0 \hspace{0.25cm}1) 
+    \left(
+    \begin{array}{cc}
+    0.66 &0.34\\
+    0.17 &0.83
+    \end{array}
+    \right) \\
+    &=(0.17 \hspace{0.25cm}0.83) 
+    \end{align*}
+
+    Hence, the distribution of $X_2$ is given by $X_2 \sim (0.17 \hspace{0.25cm}0.83)$.
+
+(b) We want to find the steady-state distribution of $X_n$.
+    \begin{align*}
+    \left(
+    \begin{array}{cc}
+    \pi_1 &\pi_2
+    \end{array}
+    \right) 
+    \left(
+    \begin{array}{cc}
+    0.8 &0.2\\
+    0.1 &0.9
+    \end{array}
+    \right) &= 
+    \left(
+    \begin{array}{cc}
+    \pi_1 &\pi_2
+    \end{array}
+    \right) \\
+    \rightarrow 
+    0.8\pi_1 + 0.1\pi_2 &= \pi_1 \\
+    0.2\pi_1 + 0.9\pi_2 &= \pi_2 \\
+    \pi_1 + \pi_2 &= 1 \\
+    \rightarrow
+    \underbrace{\left(
+    \begin{array}{cc}
+    -0.2 &0.1\\
+    1 &1
+    \end{array}
+    \right)}_{A}
+    \left(
+    \begin{array}{c}
+    \pi_1 \\
+    \pi_2
+    \end{array}
+    \right) &= 
+    \left(
+    \begin{array}{c}
+    0 \\
+    1
+    \end{array}
+    \right) \\
+    det(A)= -0.2-0.1 &=-0.3
+    \end{align*}
+    
+    We calculate each part as
+    
+    \begin{align*}
+    \pi_1 &= \frac{1}{-0.3}det\left(
+    \begin{array}{cc} 
+    0 &0.1 \\
+    1 &1
+    \end{array} 
+    \right) \\
+    &= \frac{-0.1}{-0.3} \\
+    &= \frac{1}{3}
+    \end{align*}
+    
+    \begin{align*}
+    \pi_2 &= \frac{1}{-0.3}det\left(
+    \begin{array}{cc} 
+    -0.2 &0 \\
+    1 &1
+    \end{array} 
+    \right) \\
+    &= \frac{-0.2}{-0.3} \\
+    &= \frac{2}{3}
+    \end{align*}
+    
+    Therefore, the distribution of $X_n$ is given by $X_n \sim \left(\frac{1}{3}  \hspace{0.25cm} \frac{2}{3}\right)$
+
+\newpage
+\section{Problem 5}
+
+(a) In order to show that $P$ is a regular, there must exist some power $n$ such that all entries in the $P^n$ are greater than but not equal to 0.
+
+
+    \begin{align*}
+    P &= \left(
+    \begin{array}{cccc}
+    0.8 &0.14 &0.04 &0.02\\
+    0 &0.6 &0.3 &0.1 \\
+    0 &0 &0.65 &0.35 \\
+    0.9 &0 &0 &0.1
+    \end{array}
+    \right) \\
+    \rightarrow P^3 &= \left(
+    \begin{array}{cccc}
+    0.5678 &0.20972 &0.15012 &0.07236\\
+    0.2295 &0.2286 &0.35535 &0.18655 \\
+    0.48825 &0.0441 &0.287225 &0.180425 \\
+    0.6732 &0.189 &0.0936 &0.0442
+    \end{array}
+    \right)
+    \end{align*}
+
+    Since all entries of $P^3$ greater than but not equal to 0, $P$ is a regular Markov chain. 
+    
+(b) We want to find the steady state distribution $\boldsymbol{\pi}$.
+
+\begin{align*}
+\left(
+\begin{array}{cccc}
+\pi_1 &\pi_2 &\pi_3 &\pi_4
+\end{array}
+\right) 
+\left(
+\begin{array}{cccc}
+0.8 &0.14 &0.04 &0.02\\
+0 &0.6 &0.3 &0.1 \\
+0 &0 &0.65 &0.35 \\
+0.9 &0 &0 &0.1
+\end{array}
+\right) &= 
+\left(
+\begin{array}{cccc}
+\pi_1 &\pi_2 &\pi_3 &\pi_4
+\end{array}
+\right) \\
+\rightarrow 
+0.8\pi_1 +  0.9\pi_4 &= \pi_1 \\
+0.14\pi_1 + 0.6\pi_2 &= \pi_2 \\
+0.04\pi_1 + 0.3\pi_2 +0.65\pi_3 &= \pi_3 \\
+0.02\pi_1 + 0.1\pi_2  + 0.35\pi_3 + 0.1\pi_4 &= \pi_4 \\
+\pi_1 + \pi_2 + \pi_3 + \pi_4 &= 1 \\
+\rightarrow
+\underbrace{\left(
+\begin{array}{cccc}
+-0.2 &0 &0 &0.9\\
+0.14 &-0.4 &0 &0\\
+0.04 &0.3 &-0.35 &0\\
+1 &1 &1 &1
+\end{array}
+\right)}_{A}
+\left(
+\begin{array}{c}
+\pi_1 \\
+\pi_2 \\
+\pi_3 \\
+\pi_4
+\end{array}
+\right) &= 
+\left(
+\begin{array}{c}
+0 \\
+0 \\
+0 \\
+1
+\end{array}
+\right) \\
+det(A) &= -0.2503
+\end{align*}
+
+We calculate each part as
+
+\begin{align*}
+\pi_1 &= \frac{1}{-0.2503}det\left(
+\begin{array}{cccc}
+0 &0 &0 &0.9\\
+0 &-0.4 &0 &0\\
+0 &0.3 &-0.35 &0\\
+1 &1 &1 &1
+\end{array}
+\right) \\
+&= 0.503
+\end{align*}
+
+\begin{align*}
+\pi_2 &= \frac{1}{-0.2503}det\left(
+\begin{array}{cccc}
+-0.2 &0 &0 &0.9\\
+0.14 &0 &0 &0\\
+0.04 &0 &-0.35 &0\\
+1 &1 &1 &1
+\end{array}
+\right) \\
+&= 0.176
+\end{align*}
+
+\begin{align*}
+\pi_3 &= \frac{1}{-0.2503}det\left(
+\begin{array}{cccc}
+-0.2 &0 &0 &0.9\\
+0.14 &-0.4 &0 &0\\
+0.04 &0.3 &0 &0\\
+1 &1 &1 &1
+\end{array}
+\right) \\
+&= 0.209
+\end{align*}
+
+\begin{align*}
+\pi_4 &= \frac{1}{-0.2503}det\left(
+\begin{array}{cccc}
+-0.2 &0 &0 &0\\
+0.14 &-0.4 &0 &0\\
+0.04 &0.3 &-0.35 &0\\
+1 &1 &1 &1
+\end{array}
+\right) \\
+&= 0.112
+\end{align*}
+    
+    Therefore, the steady state distribution of $X_n$ is given by $\boldsymbol{\pi} = \left(\begin{array}{cccc} 0.503 &0.176 &0.209 &0.112 \end{array} \right)$
+
+
+\newpage
+
+\section{Problem 8}
+
+The Markov Chain is given by the figure below.
+
+![Markov Chain for Lan car reports](C:\Users\surfacepro\OneDrive - University of Calgary\FALL 2020\STAT 531\a3\p8)
+
+The transition matric $P$ is given below:
+
+\begin{align*}
+P =\left(
+\begin{array}{cccc}
+0.5 &0.5 &0 &0\\
+0.04 &0.9 &0.06 &0\\
+0.04 &0 &0.9 &0.06\\
+0.04 &0.02 &0.04 &0.9
+\end{array}
+\right)
+\end{align*}
+
+\newpage
+\section{Problem 9}
+
+The Markov Chain is given by the figure below.
+
+![Markov Chain for Problem 9](C:\Users\surfacepro\OneDrive - University of Calgary\FALL 2020\STAT 531\a3\p9)
+
+The transition matric $P$ is given below:
+
+\begin{align*}
+P =\left(
+\begin{array}{cccc}
+0.1 &0.3  &0.2  &0.4\\
+0   &0.4  &0.2  &0.4\\
+0   &0    &0.6  &0.4\\
+0   &0    &0    &1
+\end{array}
+\right)
+\end{align*}
+
+
+
+\newpage
+\section{Problem 13}
+
+(a) We want to show that the complete conditional for $\mu$ is normal and the complete conditiomal for $\sigma^2$ is inverse gamma. We also want to find the corresponding parameters.
+
+    First note that,
+    
+    \begin{align*}
+    p(\mu, \phi|x) &= \frac{p(x,\mu,\phi)}{p(x)}\\
+    &\propto p(x,\mu,\phi) \hspace{2cm} (*)
+    \end{align*}
+    
+    since denominator does not involve $\mu$ or $\phi$.
+    
+    Second, note that the likelihood function is given by
+    
+    $$L(\mu, \phi) = (2\pi)^{-n/2} \phi^{n/2} exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \hspace{2cm} (**)$$
+    Third, the joint density of $(x, \mu, \phi)$ is given by
+    
+    $$p(x, \mu, \phi) = (constant) \times \phi^{n/2} exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \times exp\left(-\frac{1}{2s} (\mu-m)^2\right) \times \phi^{a-1}exp\left(-b\phi\right) \hspace{2cm} (***) $$
+
+    \textbf{(1) Complete conditional for $\mu$:}
+    
+    \begin{align*}
+    p(\mu|\phi, x) &= \frac{p(\mu, \phi|x)}{p(\phi|x)} \\
+    &\propto \frac{p(x,\mu,\phi)}{p(\phi|x)} \text{ according to (*)}\\
+    &\propto p(x, \mu, \phi) \text{ since denominator does not involve $\mu$}
+    \end{align*}
+    
+    Hence, we perform some algebra to find the parameters
+    
+    \begin{align*}
+    p(\mu|\phi, x) &\propto p(x, \mu, \phi) \\
+    &\propto \phi^{n/2} exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \times exp\left(-\frac{1}{2s} (\mu-m)^2\right) \times \phi^{a-1}exp\left(-b\phi\right) \text{ from (***)}\\
+    &\propto exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \times exp\left(-\frac{1}{2s} (\mu-m)^2\right) \\
+    &\propto exp\left( -\frac{1}{2} \left( \phi \sum x^2 - \phi 2 \sum x \mu + \phi n \mu^2 + \frac{1}{s} \mu^2 - \frac{1}{s}2\mu m + \frac{1}{s} m^2 \right)\right) \\
+    & \propto exp\left( -\frac{1}{2} \left( \mu^2 \left(n\phi + \frac{1}{s}\right) + \phi \sum x^2 - \phi 2 \sum x \mu - \frac{1}{s} 2 \mu m + \frac{1}{s} m^2 \right)\right) \\
+    &\propto exp \left( -\frac{1}{2} \left( n\phi + \frac{1}{s} \right) \left( \mu - \frac{1}{\phi + s^{-1}} \left( \phi \sum x + \frac{1}{s} m\right) \right)^2 \right)
+    \end{align*}
+    
+    Hence, $(\mu|\phi, x) \sim N\left(\frac{1}{n\phi+s^{-1}} \left(\phi \sum_{i=1}^n x_i + \frac{1}{s}m\right), n\phi + \frac{1}{s} \right)$
+
+    \newpage
+    \textbf{(2) Complete conditional for $\sigma^2$:}
+    
+    
+    
+    \begin{align*}
+    p(\phi|\mu, x) &= \frac{p(\mu, \phi|x)}{p(\mu|x)} \\
+    &\propto \frac{p(x,\mu,\phi)}{p(\mu|x)} \text{ according to (*)}\\
+    &\propto p(x, \mu, \phi) \text{ since denominator does not involve $\phi$}
+    \end{align*}
+        
+    Hence, we perform some algebra to find the parameters
+    
+    \begin{align*}
+    p(\phi|\mu, x) &\propto p(x, \mu, \phi) \\
+    &\propto  \phi^{n/2} exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \times exp\left(-\frac{1}{2s} (\mu-m)^2\right) \times \phi^{a-1}exp\left(-b\phi\right) \text{ from (***)} \\
+    &\propto \phi^{n/2} exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \times \phi^{a-1}exp\left(-b\phi\right) \\
+    & \propto \phi ^{n/2+a-1} exp \left( -\phi \left( b + \frac{1}{2} \sum (x-\mu)^2  \right)  \right)
+    \end{align*}
+    
+        
+    And so, $(\phi|\mu, x) \sim Gamma \left( \frac{n}{2} + a -1, b + \frac{1}{2} \sum_{i=1}^n (x_i -\mu)^2\right)$. \newline Therefore,  $(\sigma^2|\mu, x) \sim InvGamma \left( \frac{n}{2} + a -1, \frac{1}{b + \frac{1}{2} \sum_{i=1}^n (x_i -\mu)^2}\right)$
+
+
+(b)
+
+(c)
+
+(d)
