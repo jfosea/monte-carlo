@@ -418,7 +418,7 @@ We calculate each part as
 
 The Markov Chain is given by the figure below.
 
-![Markov Chain for Lan car reports](C:\Users\surfacepro\OneDrive - University of Calgary\FALL 2020\STAT 531\a3\p8)
+![Markov Chain for Lan car reports](C:/Users/John/Desktop/monte-carlo/a3/p8)
 
 The transition matric $P$ is given below:
 
@@ -438,7 +438,7 @@ P =\left(
 
 The Markov Chain is given by the figure below.
 
-![Markov Chain for Problem 9](C:\Users\surfacepro\OneDrive - University of Calgary\FALL 2020\STAT 531\a3\p9)
+![Markov Chain for Problem 9](C:/Users/John/Desktop/monte-carlo/a3/p9)
 
 The transition matric $P$ is given below:
 
@@ -453,76 +453,167 @@ P =\left(
 \right)
 \end{align*}
 
-
-
 \newpage
 \section{Problem 13}
 
-(a) We want to show that the complete conditional for $\mu$ is normal and the complete conditiomal for $\sigma^2$ is inverse gamma. We also want to find the corresponding parameters.
+(a)  We want to show that the complete conditional for $\mu$ is normal and the complete conditiomal for $\sigma^2$ is inverse gamma. We also want to find the corresponding parameters. 
 
-    First note that,
-    
-    \begin{align*}
-    p(\mu, \phi|x) &= \frac{p(x,\mu,\phi)}{p(x)}\\
-    &\propto p(x,\mu,\phi) \hspace{2cm} (*)
-    \end{align*}
-    
-    since denominator does not involve $\mu$ or $\phi$.
-    
-    Second, note that the likelihood function is given by
-    
-    $$L(\mu, \phi) = (2\pi)^{-n/2} \phi^{n/2} exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \hspace{2cm} (**)$$
-    Third, the joint density of $(x, \mu, \phi)$ is given by
-    
-    $$p(x, \mu, \phi) = (constant) \times \phi^{n/2} exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \times exp\left(-\frac{1}{2s} (\mu-m)^2\right) \times \phi^{a-1}exp\left(-b\phi\right) \hspace{2cm} (***) $$
+      First, note that Bayes' theorem gives,
+      $$p(\mu|\sigma^2, x) = \frac{p(\mu, \sigma^2, x)}{p(\sigma^2, x)} = \frac{L(x_1, \cdots, x_n|\mu, \sigma^2) p(\mu) p(\sigma^2)}{p(\sigma^2, x)}  \propto L(x_1, \cdots, x_n|\mu, \sigma^2) p(\mu) \hspace{1cm} (13.1)$$
+      Since the denominator does not involve $\mu$.
+      
+      $$p(\sigma^2|\mu, x) = \frac{p(\mu, \sigma^2, x)}{p(\sigma^2, x)} = \frac{L(x_1, \cdots, x_n|\mu, \sigma^2) p(\mu) p(\sigma^2)}{p(\mu, x)}  \propto L(x_1, \cdots, x_n|\mu, \sigma^2) p(\sigma^2) \hspace{1cm} (13.2)$$
+      Since the denominator does not involve $\sigma^2$.
+      
+      Second, the priors are given by:
+      
+      $$ p(\mu) = \frac{1}{\sqrt{2\pi s^2}} exp\left(- \frac{1}{2s^2}(\mu-m)^2\right) \hspace{1cm} (13.3)$$
+      $$p(\sigma^{-2})  = \frac{1}{\Gamma (a) b^a} (\sigma^{-2})^{a-1} exp \left( \frac{1}{\sigma^2 b} \right) \hspace{1cm} (13.4)$$
+      Third, the likelihood function is given by
+      
+      $$L(x_1, \cdots, x_n|\mu,\sigma^2) = \prod _{i=1} ^n \frac{1}{\sqrt{2\pi \sigma^ 2}} exp \left( -\frac{1}{2\sigma^ 2} (x_i - \mu)^ 2\right)= \frac{1}{(\sqrt{2\pi \sigma^2})^n} exp \left(- \frac{1}{2\sigma^2} \sum_{i=1} ^n (x_i-\mu)^2 \right) \hspace{1cm} (13.5)$$
+      
+      (1) \textbf{Complete Conditional for $\mu$}
+      
+      \begin{align*}
+      p(\mu|\sigma^ 2, x) &\propto L(x_1, \cdots, x_n|\mu,\sigma^2) \times p(\mu) &\text{ by } (13.1) \\
+      &\propto   \frac{1}{(\sqrt{2\pi \sigma^2})^n} exp \left(- \frac{1}{2\sigma^2} \sum_{i=1} ^n (x_i-\mu)^2 \right) \times \frac{1}{\sqrt{2\pi s^2}} exp\left( \frac{1}{2s^2}(\mu-m)^2\right) &\text{ by } (13.3,13.5) \\
+      &\propto exp \left( -\frac{1}{2\sigma^2} \sum_{i=1} ^n (x_i - \mu)^2  - \frac{1}{2s^2} (\mu-m)^2 \right) \\
+      &\propto  exp \left( -\frac{1}{2} \frac{\sigma^2 + ns^2}{\sigma^2s} \left(\mu - \frac{s\sum_{i=1}^n x_i + \sigma^2m}{\sigma^2 + ns^2} \right)^2 \right)
+      \end{align*}
+      
+      Hence, $(\mu|\sigma^2, x) \sim N \left(\frac{s^2\sum_{i=1}^n x_i + \sigma^2m}{\sigma^2 + ns^2} , \frac{\sigma^2s}{\sigma^2 + ns^2} \right)$
+      
+      (2) \textbf{Complete Conditional for $\sigma^2$}
+      
+      \begin{align*}
+      p(\sigma^2|\mu, x) &\propto L(x_1, \cdots, x_n|\mu,\sigma^2) \times p(\sigma^2) &\text{ by } (13.2) \\
+      &\propto   \frac{1}{(\sqrt{2\pi \sigma^2})^n} exp \left(- \frac{1}{2\sigma^2} \sum_{i=1} ^n (x_i-\mu)^2 \right) \times \frac{1}{\Gamma (a) b^a} (\sigma^{-2})^{a-1} exp \left( \frac{1}{\sigma^2 b} \right) &\text{ by } (13.4,13.5) \\
+      & \frac{1}{\sigma^{2(n/2 + a -1)}} exp \left( -\frac{1}{\sigma^2} \left(b + \frac{1}{2} \sum_{i=1} ^n (x_i - \mu)^2 \right) \right)
+      \end{align*}
+      
+      Hence, $(\sigma^2|\mu, x) \sim invGamma \left( \frac{n}{2} + a, b + \frac{1}{2} \sum_{i=1} ^n (x_i - \mu)^2\right)$
+      
+(b) Given the conditional distributions above (a), the Gibbs sampling algorithm is specified below:
 
-    \textbf{(1) Complete conditional for $\mu$:}
-    
-    \begin{align*}
-    p(\mu|\phi, x) &= \frac{p(\mu, \phi|x)}{p(\phi|x)} \\
-    &\propto \frac{p(x,\mu,\phi)}{p(\phi|x)} \text{ according to (*)}\\
-    &\propto p(x, \mu, \phi) \text{ since denominator does not involve $\mu$}
-    \end{align*}
-    
-    Hence, we perform some algebra to find the parameters
-    
-    \begin{align*}
-    p(\mu|\phi, x) &\propto p(x, \mu, \phi) \\
-    &\propto \phi^{n/2} exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \times exp\left(-\frac{1}{2s} (\mu-m)^2\right) \times \phi^{a-1}exp\left(-b\phi\right) \text{ from (***)}\\
-    &\propto exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \times exp\left(-\frac{1}{2s} (\mu-m)^2\right) \\
-    &\propto exp\left( -\frac{1}{2} \left( \phi \sum x^2 - \phi 2 \sum x \mu + \phi n \mu^2 + \frac{1}{s} \mu^2 - \frac{1}{s}2\mu m + \frac{1}{s} m^2 \right)\right) \\
-    & \propto exp\left( -\frac{1}{2} \left( \mu^2 \left(n\phi + \frac{1}{s}\right) + \phi \sum x^2 - \phi 2 \sum x \mu - \frac{1}{s} 2 \mu m + \frac{1}{s} m^2 \right)\right) \\
-    &\propto exp \left( -\frac{1}{2} \left( n\phi + \frac{1}{s} \right) \left( \mu - \frac{1}{\phi + s^{-1}} \left( \phi \sum x + \frac{1}{s} m\right) \right)^2 \right)
-    \end{align*}
-    
-    Hence, $(\mu|\phi, x) \sim N\left(\frac{1}{n\phi+s^{-1}} \left(\phi \sum_{i=1}^n x_i + \frac{1}{s}m\right), n\phi + \frac{1}{s} \right)$
+    1. Initialize $\sigma^2_0$ and generate $\mu_1$ from $p(\mu|\sigma^ 2, x=\sigma^2_0)$.
+    2. Using $\mu_1$, generate $\sigma^ 2_1$ from $p(\sigma^2|\mu, x=\mu_1)$.
+    3. Repeat step 1 and 2 arbitrary $n$ times (eg. $n=10e5$). Throw away burn in from sampler $p\%$ (eg. $40\%$).
 
-    \newpage
-    \textbf{(2) Complete conditional for $\sigma^2$:}
-    
-    
-    
-    \begin{align*}
-    p(\phi|\mu, x) &= \frac{p(\mu, \phi|x)}{p(\mu|x)} \\
-    &\propto \frac{p(x,\mu,\phi)}{p(\mu|x)} \text{ according to (*)}\\
-    &\propto p(x, \mu, \phi) \text{ since denominator does not involve $\phi$}
-    \end{align*}
-        
-    Hence, we perform some algebra to find the parameters
-    
-    \begin{align*}
-    p(\phi|\mu, x) &\propto p(x, \mu, \phi) \\
-    &\propto  \phi^{n/2} exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \times exp\left(-\frac{1}{2s} (\mu-m)^2\right) \times \phi^{a-1}exp\left(-b\phi\right) \text{ from (***)} \\
-    &\propto \phi^{n/2} exp\left(-\frac{\phi}{2} \sum_{i=1} ^n (x_i-\mu)^2\right) \times \phi^{a-1}exp\left(-b\phi\right) \\
-    & \propto \phi ^{n/2+a-1} exp \left( -\phi \left( b + \frac{1}{2} \sum (x-\mu)^2  \right)  \right)
-    \end{align*}
-    
-        
-    And so, $(\phi|\mu, x) \sim Gamma \left( \frac{n}{2} + a -1, b + \frac{1}{2} \sum_{i=1}^n (x_i -\mu)^2\right)$. \newline Therefore,  $(\sigma^2|\mu, x) \sim InvGamma \left( \frac{n}{2} + a -1, \frac{1}{b + \frac{1}{2} \sum_{i=1}^n (x_i -\mu)^2}\right)$
+(c) Below is an R program 
 
+      ```{r}
+      library(invgamma)
+      
+      x = c(1.45, 2.08, 1.62, 1.51, 1.94, 1.43, 1.49, 1.10, 2.14, 2.29)
+      n = 10; m = 1; s = 0.2; s2 = s^2; a = 2; b = 1
+      Nsim = 10000
+      mu1 = 0.6; sigma1 = 0.4
+      
+      mu = rep(0, Nsim)
+      sigma2 = rep(0, Nsim)
+      
+      sigma2[1]=sigma1^2
+      mu[1] = mu1
+      
+      set.seed(1)
+      for (i in 2:Nsim) {
+        mu[i] = rnorm(1, 
+          mean = (1/sigma2[i-1]+n*s2) * (s2*sum(x)+sigma2[i-1]*m),
+          sd = sqrt((sigma2[i-1]*s)/(sigma2[i-1] + n*s2))
+          )
+        sigma2[i] = 1/rgamma(1, 
+                          shape = (n/2)+a,
+                          rate = (1/2)*(sum((x - mu1)^2)) + b
+                          )
+      }
+      
+      mu.final = tail(mu, 5000)
+      sigma2.final = tail(sigma2, 5000)
+      hist(mu.final,nclass=75,freq=FALSE,xlab="mu",ylab="Marginal density",main="Marginal density of mu")
+      hist(sigma2.final,nclass=75,freq=FALSE,xlab="sigma^2",ylab="Marginal density",main="Marginal density of sigma^2")
+      ```
+      \underline{Commentary:} The plots above show that $\mu$ seems to follow a normal distribution. As well, $\sigma^2$ seems to follows an inverse Gamma distribution.
 
-(b)
+(d) 
+      ```{r}
+      mean(mu.final)
+      mean(sigma2.final)
+      mean(x)
+      var(x)
+      ``` 
+      
+      The mean of $\mu$ is 2.399519 and the mean of $\sigma^2$ is 1.283088.  The estimates differ from the sample.
+      
+      
+      
+\newpage
+\section{Problem 14}
 
-(c)
+(a) We want to derive the posterior distribution $f(\theta|X=(x_1,x_2,x_3,x_4))$ up to a constant factor.
 
-(d)
+      The likelihood of $\theta$ given $x_1, x_2, x_3, x_4$ is given by
+      
+      $$L(\theta|X=(x_1,x_2,x_3,x_4)) = \frac{n!}{x_1!x_2!x_3!x_4!} \left( \frac{1}{2} + \frac{\theta}{4}\right)^{x_1} \left( \frac{1-\theta}{4}\right)^{x_2}  \left( \frac{1-\theta}{4}\right)^{x_3} \left( \frac{\theta}{4}\right) ^ {x_4}$$
+      
+      We assume that $\theta \sim Unif(0,1)$, $p(\theta) = 1$, and $(x_1,x_2,x_3,x_4) = (125, 18, 20, 34)$.we find the posterior distribution to a constant factor by 
+      
+      \begin{align*}
+      p(\theta|X=(125, 18, 20, 34)) &\propto L(\theta|X=(125, 18, 20, 34)) \times p(\theta) \\
+      &\propto \left( \frac{1}{2} + \frac{\theta}{4}\right)^{125} \left( \frac{1-\theta}{4}\right)^{18}  \left( \frac{1-\theta}{4}\right)^{20} \left( \frac{\theta}{4}\right) ^ {34} \times 1 \\
+      &\propto \left( \frac{1}{2} + \frac{\theta}{4}\right)^{125} \left( \frac{1-\theta}{4}\right)^{38} \left( \frac{\theta}{4}\right) ^ {34} \hspace{1cm} (14.1)
+      \end{align*}
+
+(b) We perform a random walk Metropolis Hastings algorithm with theory and R code as follows:
+
+    \textbf{Theory:} 
+    We consider $$Y_t = X_t + \epsilon_t $$
+    where $\epsilon_t$ is a derived from distribution $g$ independed of $X_t$.
+    
+    The candidate density $q(y|x)$ is now of the $g(y-x).$ And so the Markov chain associated with $q$ is a random walk when the density $g$ is symmetric around zero, i.e. $g(-t) = g(t).$
+      
+      \textbf{Algorithm:} We want to simulate the target $\theta$ density proportional to $(14.1)$ with the proposal density $g \sim Unif(-0.5, 0.5)$. Given $x_t$,
+      
+      1. Generate $Y_{t+1} \sim g(y-x_t)$
+      2. Take $$x_{t+1} = \begin{cases} Y_{t+1}, &\text{ with probability } min\left\{\frac{p(
+      Y_{t+1})}{p(x_t)},1 \right\} \\ x_t, &\text{ otherwise} \end{cases} $$
+      
+      \textbf{R code:}
+      
+      ```{r}
+      set.seed(3)
+      target = function(theta) (0.5 + 0.25 * theta)^125 * (0.25 * (1 - theta))^38 * (0.25 * theta)^34
+      NSim = 5000
+      X = Y = rep(0, NSim)
+      
+      X[1] = runif(1,-0.5,0.5)
+      
+      for (t in 2:NSim) {
+        Y[t] = X[t-1] + runif(1,-0.5,0.5)
+        Test = target(Y[t]) / target(X[t-1])
+        X[t] = ifelse(runif(1) < min(1, Test), Y[t], X[t-1])
+      }
+      
+      hist(X, nclass=75, freq=FALSE, xlab="",ylab="",col="wheat2", main="Random walk MH with U(-0.5, 0.5)")
+      plot(ts(X), ylab = "X")
+      ```
+      
+      
+      \underline{Commentary:} The histogram appears to be centered around -0.5 and appears to have a multinomial shape.
+
+(c) 
+
+      ```{r}
+      X.final = tail(X, 4000)
+      mean(X.final)
+      var(X.final)
+      ```
+      
+      After discarding the burn-in samples from (b), we estimate that the posterior mean is -0.5533081 and the posterior variance is 0.005062452.
+
+(d) We use R to find the normalizing constant 
+      ```{r}
+      integrate(target, 0,1)
+      ``` 
+      
+      Hence, the normalizing constant is 5.84345e-91. 
